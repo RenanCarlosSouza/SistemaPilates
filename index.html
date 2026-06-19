@@ -18,7 +18,8 @@
         </div>
         <div class="form-panel">
             <div class="login-box">
-                <h2>Login</h2>
+                <h2>Acesso Restrito</h2>
+                <p>Área exclusiva para administração interna.</p>
                 <form class="login-form">
                     <input type="text" placeholder="Usuário" required>
                     <input type="password" placeholder="Senha" required>
@@ -39,8 +40,7 @@
                     <li><a href="#" data-target="aba-agenda">Agenda</a></li>
                     <li><a href="#" data-target="aba-prontuarios">Prontuários</a></li>
                     <li><a href="#" data-target="aba-vencimentos">Vencimentos & Caixa</a></li>
-                    <li><a href="#" id="btn-sair" style="color: #ef4444; font-weight: bold; margin-left: 20px;">Sair
-                            ⍈</a></li>
+                    <li><a href="#" id="btn-sair" class="btn-logout-nav">Sair ⍈</a></li>
                 </ul>
             </nav>
         </header>
@@ -72,37 +72,35 @@
                 <div class="section-header">
                     <h2>Gestão de Cadastros</h2>
                 </div>
-
                 <div class="form-container">
-                    <form id="form-novo-aluno">
+                    <form id="form-novo-aluno" class="form-flex">
                         <input type="text" id="nome-aluno" placeholder="Nome Completo (A-Z)" required>
-                        <input type="text" id="whats-aluno" placeholder="WhatsApp (Ex: 11999999999)" required>
-                        <input type="text" id="queixa-aluno" placeholder="Queixa Inicial (Ex: Dor Lombar)" required>
-
+                        <input type="text" id="whats-aluno" placeholder="WhatsApp" required>
+                        <input type="text" id="queixa-aluno" placeholder="Queixa Inicial" required>
                         <select id="servico-aluno" required>
                             <option value="" disabled selected>Selecione o Serviço</option>
                             <option value="Pilates R$ 100,00">Pilates R$ 100,00</option>
                             <option value="Pilates R$ 150,00">Pilates R$ 150,00</option>
                         </select>
-                        <input type="number" id="vencimento-aluno" placeholder="Dia Venc. (1 a 31)" required min="1"
-                            max="31">
+                        <input type="number" id="vencimento-aluno" placeholder="Dia Venc." required min="1" max="31">
                         <button type="submit" class="btn-primary">Salvar Aluno</button>
                     </form>
                 </div>
-
                 <div class="table-container">
                     <h3>Alunos Ativos</h3>
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>WhatsApp</th>
-                                <th>Queixa</th>
-                                <th>Vencimento</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tabela-alunos"></tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>WhatsApp</th>
+                                    <th>Queixa</th>
+                                    <th>Vencimento</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabela-alunos"></tbody>
+                        </table>
+                    </div>
                 </div>
             </section>
 
@@ -111,19 +109,16 @@
                     <h2>Agenda de Turmas</h2>
                 </div>
                 <div class="form-container">
-                    <form id="form-agenda" style="display: flex; gap: 1rem; align-items: center;">
-                        <select id="agenda-aluno-select" required
-                            style="flex:1; padding:1rem; border:1px solid #ccc; border-radius:6px;"></select>
-                        <select id="agenda-dia" required
-                            style="padding:1rem; border:1px solid #ccc; border-radius:6px;">
+                    <form id="form-agenda" class="form-flex">
+                        <select id="agenda-aluno-select" required></select>
+                        <select id="agenda-dia" required>
                             <option value="Segunda">Segunda-feira</option>
                             <option value="Terça">Terça-feira</option>
                             <option value="Quarta">Quarta-feira</option>
                             <option value="Quinta">Quinta-feira</option>
                             <option value="Sexta">Sexta-feira</option>
                         </select>
-                        <input type="time" id="agenda-hora" required
-                            style="padding:1rem; border:1px solid #ccc; border-radius:6px;">
+                        <input type="time" id="agenda-hora" required>
                         <button type="submit" class="btn-primary">Marcar Horário</button>
                     </form>
                 </div>
@@ -137,28 +132,19 @@
                 <div class="section-header">
                     <h2>Prontuários e Evolução</h2>
                 </div>
-
-                <select id="prontuario-busca" class="universal-search"
-                    style="padding:1rem; width:100%; border:2px solid #0A2463; border-radius:8px; margin-bottom:1rem;">
+                <select id="prontuario-busca" class="universal-search">
                     <option value="">Selecione um aluno para ver o prontuário...</option>
                 </select>
-
                 <div id="area-prontuario" class="form-container" style="display: none;">
                     <h3 id="pront-nome" style="color: #0A2463; margin-bottom: 0.5rem; font-size: 1.5rem;">Nome</h3>
                     <p style="margin-bottom: 1.5rem; font-size: 1.1rem;"><strong>Queixa Inicial:</strong> <span
                             id="pront-queixa"></span></p>
-
                     <textarea id="texto-evolucao" rows="4"
-                        placeholder="Registre a evolução, dores ou exercícios da aula de hoje..."
-                        style="width:100%; padding:1rem; border:1px solid #ccc; border-radius:6px; margin-bottom:1rem;"></textarea>
-
-                    <div style="display: flex; gap: 1rem;">
+                        placeholder="Registre a evolução da aula de hoje..."></textarea>
+                    <div class="action-buttons-flex">
                         <button id="btn-salvar-evolucao" class="btn-primary">Salvar Evolução</button>
-                        <button id="btn-gerar-pdf"
-                            style="background: #dc2626; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold;">📄
-                            Baixar PDF do Prontuário</button>
+                        <button id="btn-gerar-pdf" class="btn-danger">📄 Baixar PDF do Prontuário</button>
                     </div>
-
                     <h4
                         style="margin-top: 3rem; margin-bottom: 1rem; border-bottom: 1px solid #eee; padding-bottom: 10px;">
                         Histórico de Evolução</h4>
@@ -170,31 +156,43 @@
                 <div class="section-header">
                     <h2>Controle Financeiro e Vencimentos</h2>
                 </div>
-
                 <div class="status-cards">
                     <div class="status-card premium">
                         <h3>Em Caixa (Mês)</h3>
                         <p id="total-caixa">R$ 0,00</p>
                     </div>
                 </div>
-
                 <div class="table-container">
                     <h3>Lista de Vencimentos</h3>
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Aluno</th>
-                                <th>Serviço</th>
-                                <th>Dia de Venc.</th>
-                                <th>Ação / Status</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tabela-vencimentos"></tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Aluno</th>
+                                    <th>Serviço</th>
+                                    <th>Dia Venc.</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabela-vencimentos"></tbody>
+                        </table>
+                    </div>
                 </div>
             </section>
 
         </main>
+    </div>
+
+    <div id="toast-container"></div>
+    <div id="modal-sair" class="modal-overlay" style="display: none;">
+        <div class="modal-box">
+            <h3>Sair do Sistema</h3>
+            <p>Tem certeza que deseja sair e bloquear a tela administrativa?</p>
+            <div class="modal-actions">
+                <button id="btn-cancelar-sair" class="btn-secondary">Cancelar</button>
+                <button id="btn-confirmar-sair" class="btn-danger">Sim, Sair</button>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
